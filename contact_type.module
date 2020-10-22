@@ -1,0 +1,19 @@
+<?php
+
+use Drupal\Core\Session\AccountInterface;
+use Drupal\Core\TempStore\SharedTempStoreFactory;
+
+/**
+ *  Implementation of hook_user_login
+ */
+function contact_type_user_login(AccountInterface $account) {
+  \Drupal::service('civicrm')->initialize();
+
+  $current_contact_id = \CRM_Core_BAO_UFMatch::getContactId($account->id());
+  $contact_type = \CRM_Contact_BAO_Contact::getContactSubType($current_contact_id);
+
+  //$tempstore = \Drupal::service('tempstore.shared')->get('user_contact_type');
+  //$tempstore->set('contact_type', $contact_type);
+  
+  $_SESSION['user_contact_type'] = $contact_type;
+}

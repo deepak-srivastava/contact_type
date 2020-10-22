@@ -1,0 +1,6 @@
+name: Contact Type
+description: 'Set a session flag based on CiviCRM contact type'
+package: Custom
+type: module
+version: 1.0
+core: 8.x
